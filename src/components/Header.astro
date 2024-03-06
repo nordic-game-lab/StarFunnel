@@ -5,7 +5,7 @@ import ColorSwitch from "@components/common/ColorSwitch.vue";
 
 import { t } from "@util/translate";
 
-const { menu, title, social, color, cta } = Astro.props;
+const { title, social, color, cta } = Astro.props;
 const currentPath = Astro.url.pathname.split("/")[1];
 
 const isActive = (href) => {
@@ -27,23 +27,6 @@ const isActive = (href) => {
       class="flex h-full items-center justify-start"
       ><Icon name="logo" class="h-6" /></a
     >
-    {
-      menu && (
-        <div class="nav-underline nav-links relative hidden flex-nowrap items-center gap-4 pl-4 tracking-wide transition-colors  md:flex ">
-          {menu.map((link) => (
-            <a
-              href={link.href}
-              class={`${
-                isActive(link.href) ? "active font-bold" : ""
-              }  btn-replace`}
-              data-replace={link.label}
-            >
-              <span> {link.label}</span>
-            </a>
-          ))}
-        </div>
-      )
-    }
 
     <div
       class="nav-underline relative ml-auto flex flex-nowrap items-center justify-end gap-2 pl-4"
@@ -65,14 +48,6 @@ const isActive = (href) => {
       }
 
       <ColorSwitch client:load />
-
-      <div class="md:hidden">
-        <NavMobile
-          {menu}
-          active={currentPath}
-          client:idle
-          translations={{ menu: t("menu"), close: t("close") }}
-        >
           <Icon name="menu-solid" class="h-10 w-10" slot="menu" />
           <Icon name="close" class="h-10 w-10" slot="close" />
           <Icon name="logo" class="w-full" slot="logo" />
